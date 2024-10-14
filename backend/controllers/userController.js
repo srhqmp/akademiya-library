@@ -7,7 +7,23 @@ import generateToken from "../utils/generateToken.js";
 // @access Public
 
 const authUser = asyncHandler(async (req, res) => {
-  res.json({ message: "Success" });
+  const { username, password } = req.body;
+
+  const user = await User.findOne({ username });
+
+  if (user && (await user.matchPassword(password))) {
+    generateToken(res, user._id);
+
+    res.json({
+      _id: user._id,
+      username: user.username,
+      name: user.name,
+      email: user.email,
+    });
+  } else {
+    res.status(401);
+    throw new Error("Invalid username or password");
+  }
 });
 
 // @desc    Register a new user
@@ -32,7 +48,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   if (user) {
     generateToken(res, user._id);
-    
+
     res.status(201).json({
       _id: user._id,
       username: user.username,
