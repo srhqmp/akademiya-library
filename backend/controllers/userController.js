@@ -19,6 +19,7 @@ const authUser = asyncHandler(async (req, res) => {
       username: user.username,
       name: user.name,
       email: user.email,
+      role: user.role,
     });
   } else {
     res.status(401);
@@ -30,7 +31,7 @@ const authUser = asyncHandler(async (req, res) => {
 // @route   POST /api/users
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { username, name, email, password } = req.body;
+  const { username, name, email, role, password } = req.body;
 
   const userExists = await User.findOne({ username });
 
@@ -43,6 +44,7 @@ const registerUser = asyncHandler(async (req, res) => {
     username,
     name,
     email,
+    role,
     password,
   });
 
@@ -54,6 +56,7 @@ const registerUser = asyncHandler(async (req, res) => {
       username: user.username,
       name: user.name,
       email: user.email,
+      role: user.role,
     });
   } else {
     res.status(400);
@@ -82,6 +85,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
       username: req.user.username,
       name: req.user.name,
       email: req.user.email,
+      role: req.user.role,
     });
   } else {
     res.status(404);
@@ -111,6 +115,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       username: updatedUser.username,
       name: updatedUser.name,
       email: updatedUser.email,
+      role: updatedUser.role, // role should remain the same
     });
   } else {
     res.status(404);
