@@ -11,7 +11,11 @@ const bookSchema = mongoose.Schema(
     language: { type: String },
     year: { type: String },
     country: { type: String },
-    borrowedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }], // to track who borrowed the book
+    borrowedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      default: null,
+    }, // to track who borrowed the book
   },
   {
     timestamps: true,

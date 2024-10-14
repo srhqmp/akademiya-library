@@ -1,0 +1,28 @@
+[
+  {
+    "username": "root",
+    "password": "AkademiyaLibrary@2024",
+    "email": "root@test.com",
+    "name": "Super Admin",
+    "role": "admin"
+  },
+  {
+    "username": "srhqmp",
+    "password": "AkademiyaLibrary@2024",
+    "email": "kimposarah@gmail.com",
+    "name": "Sarah Quimpo",
+    "role": "admin"
+  },
+  {
+    "username": "minzy21",
+    "password": "AkademiyaLibrary@2024",
+    "email": "minzy21@test.com",
+    "name": "Minzy Gong"
+  },
+  {
+    "username": "jd2024",
+    "password": "AkademiyaLibrary@2024",
+    "email": "jd2024@test.com",
+    "name": "Juan Dela Cruz"
+  }
+]

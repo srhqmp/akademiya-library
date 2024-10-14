@@ -4,7 +4,9 @@ import bcrypt from "bcryptjs";
 const borrowedBookSchema = new mongoose.Schema({
   book: { type: mongoose.Schema.Types.ObjectId, ref: "Book", required: true },
   borrowDate: { type: Date, default: Date.now },
-  returnDate: { type: Date },
+  returnDate: { type: Date, default: null },
+  isReturned: { type: Boolean, default: false },
+  dateReturned: { type: Date, default: null },
 });
 
 const userSchema = mongoose.Schema(
@@ -27,6 +29,7 @@ const userSchema = mongoose.Schema(
       type: String,
       enum: ["admin", "student"],
       required: true,
+      default: "student",
     },
     password: {
       type: String,
@@ -38,6 +41,16 @@ const userSchema = mongoose.Schema(
     timestamps: true,
   }
 );
+
+// Calculate returnDate as 10 days after borrowDate
+borrowedBookSchema.pre("save", function (next) {
+  if (!this.returnDate) {
+    const returnDate = new Date(this.borrowDate);
+    returnDate.setDate(this.borrowDate.getDate() + 10);
+    this.returnDate = returnDate;
+  }
+  next();
+});
 
 // Encrypt password using bcrypt
 userSchema.pre("save", async function (next) {
