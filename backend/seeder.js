@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import bcrypt from "bcryptjs";
 
 import booksData from "../data/books.json" assert { type: "json" };
 import usersData from "../data/users.json" assert { type: "json" };
@@ -11,11 +10,6 @@ import connectDB from "./config/db.js";
 
 dotenv.config({ path: ".env.local" });
 
-const hashPassword = async (user) => {
-  const salt = await bcrypt.genSalt(10);
-  user.password = await bcrypt.hash(user.password, salt);
-};
-
 const seedUsers = async () => {
   let count = 0;
 
@@ -24,7 +18,6 @@ const seedUsers = async () => {
     await User.deleteMany();
 
     for (const user of usersData) {
-      await hashPassword(user);
       await User.create(user);
       count++;
     }
