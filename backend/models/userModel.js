@@ -1,7 +1,13 @@
 import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
 
 const userSchema = mongoose.Schema(
   {
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     name: {
       type: String,
       required: true,
@@ -20,6 +26,18 @@ const userSchema = mongoose.Schema(
     timestamps: true,
   }
 );
+
+// Encrypt password using bcrypt
+userSchema.pre("save", async function (next) {
+  // If the password has not been modified, skip hashing
+  if (!this.isModified("password")) {
+    next();
+  }
+
+  // If the password is modified, hash it
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
 
 const User = mongoose.model("User", userSchema);
 
