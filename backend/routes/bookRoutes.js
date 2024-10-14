@@ -9,16 +9,16 @@ import {
   borrowBook,
   returnBook,
 } from "../controllers/bookController.js";
-import { protect } from "../middleware/authMiddleware.js";
+import { protect, isAdmin } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
 router.route("/").get(getAllBooks);
 router.route("/available").get(getAvailableBooks);
 router.route("/:id").get(getBook);
-router.route("/").post(protect, addBook);
-router.route("/:id").put(protect, updateBook);
-router.route("/:id").delete(protect, deleteBook);
+router.route("/").post(protect, isAdmin, addBook);
+router.route("/:id").put(protect, isAdmin, updateBook);
+router.route("/:id").delete(protect, isAdmin, deleteBook);
 router.route("/borrow/:id").post(protect, borrowBook);
 router.route("/return/:id").post(protect, returnBook);
 

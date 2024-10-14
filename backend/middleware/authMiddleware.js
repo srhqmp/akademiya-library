@@ -25,4 +25,14 @@ const protect = asyncHandler(async (req, res, next) => {
   }
 });
 
-export { protect };
+// Middleware to protect admin routes
+const isAdmin = (req, res, next) => {
+  if (req.user && req.user.role === "admin") {
+    next();
+  } else {
+    res.status(403);
+    throw new Error("Access denied, admin privileges required.");
+  }
+};
+
+export { protect, isAdmin };

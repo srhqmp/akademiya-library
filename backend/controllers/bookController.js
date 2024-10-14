@@ -19,7 +19,7 @@ const getAvailableBooks = asyncHandler(async (req, res) => {
 // @route   GET /api/books/:id
 // @access  Public
 const getBook = asyncHandler(async (req, res) => {
-  res.send("get book", req.params.id);
+  res.send(`get book ${req.params.id}`);
 });
 
 // @desc    Add new book
@@ -33,28 +33,28 @@ const addBook = asyncHandler(async (req, res) => {
 // @route   PUT /api/books/:id
 // @access  Private
 const updateBook = asyncHandler(async (req, res) => {
-  res.send("book updated", req.params.id);
+  res.send(`book updated ${req.params.id}`);
 });
 
 // @desc    Delete a book
 // @route   DELETE /api/books/:id
 // @access  Private
 const deleteBook = asyncHandler(async (req, res) => {
-  res.send("book updated", req.params.id);
+  res.send(`book deleted ${req.params.id}`);
 });
 
 // @desc    Borrow a book
 // @route   POST /api/books/borrow/:id
 // @access  Private
 const borrowBook = asyncHandler(async (req, res) => {
-  res.send("book borrowed", req.params.id);
+  res.send(`book borrowed ${req.params.id}`);
 });
 
 // @desc    Borrow a book
 // @route   POST /api/books/return/:id
 // @access  Private
 const returnBook = asyncHandler(async (req, res) => {
-  res.send("book returned", req.params.id);
+  res.send(`book returned ${req.params.id}`);
 });
 
 export {
