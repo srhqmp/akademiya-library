@@ -1,6 +1,12 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
+const borrowedBookSchema = new mongoose.Schema({
+  book: { type: mongoose.Schema.Types.ObjectId, ref: "Book", required: true },
+  borrowDate: { type: Date, default: Date.now },
+  returnDate: { type: Date },
+});
+
 const userSchema = mongoose.Schema(
   {
     username: {
@@ -26,6 +32,7 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    borrowedBooks: [borrowedBookSchema],
   },
   {
     timestamps: true,

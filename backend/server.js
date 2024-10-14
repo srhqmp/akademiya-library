@@ -5,6 +5,7 @@ import connectDB from "./config/db.js";
 
 // routes
 import userRoutes from "./routes/userRoutes.js";
+import bookRoutes from "./routes/bookRoutes.js";
 
 // middlewares
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
@@ -24,6 +25,7 @@ app.use(cookieParser());
 app.get("/", (req, res) => res.send("API running"));
 
 app.use("/api/users", userRoutes);
+app.use("/api/books", bookRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
