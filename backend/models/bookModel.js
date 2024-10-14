@@ -4,10 +4,13 @@ const bookSchema = mongoose.Schema(
   {
     title: { type: String, required: true },
     author: { type: String, required: true },
-    imageUrl: { type: String, required: true },
-    genres: [{ type: String }],
+    imageUrl: { type: String },
+    genre: { type: String },
+    pages: { type: Number },
     description: { type: String },
-    datePublished: { type: Date },
+    language: { type: String },
+    year: { type: String },
+    country: { type: String },
     borrowedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }], // to track who borrowed the book
   },
   {
