@@ -1,17 +1,15 @@
-import { ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
+import { BrowserRouter } from "react-router-dom";
+import Routes from "./Routes";
+import Page from "./components/Page";
 
-import Header from "./components/Header";
-import HomeScreen from "./screens/HomeScreen";
-
-import theme from "./theme/index";
-
-export default function App() {
+const App = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Header />
-      <HomeScreen />
-    </ThemeProvider>
+    <Page>
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
+    </Page>
   );
-}
+};
+
+export default App;
