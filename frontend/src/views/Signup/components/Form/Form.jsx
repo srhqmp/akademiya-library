@@ -6,6 +6,14 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import { useTheme } from "@mui/material";
+
+const Role = {
+  student: "student",
+  admin: "admin",
+};
 
 const validationSchema = yup.object({
   firstName: yup
@@ -20,6 +28,10 @@ const validationSchema = yup.object({
     .min(2, "Please enter a valid name")
     .max(50, "Please enter a valid name")
     .required("Please specify your last name"),
+  role: yup
+    .string()
+    .oneOf([Role.admin, Role.student], "Invalid Role")
+    .required("Role is required"),
   email: yup
     .string()
     .trim()
@@ -32,11 +44,14 @@ const validationSchema = yup.object({
 });
 
 const Form = () => {
+  const theme = useTheme();
+
   const initialValues = {
     firstName: "",
     lastName: "",
     email: "",
     password: "",
+    role: "",
   };
 
   const onSubmit = (values) => {
@@ -108,6 +123,37 @@ const Form = () => {
               helperText={formik.touched.lastName && formik.errors.lastName}
             />
           </Grid>
+          <Grid item xs={12}>
+            <Typography variant={"subtitle2"} sx={{ marginBottom: 2 }}>
+              Select your role
+            </Typography>
+            <Select
+              value={formik.values.role}
+              name={"role"}
+              onChange={formik.handleChange}
+              fullWidth
+              sx={{
+                ".MuiSelect-select.MuiSelect-outlined": {
+                  paddingY: "9px !important",
+                },
+                ".MuiOutlinedInput-notchedOutline": {
+                  borderColor: theme.palette.divider,
+                },
+              }}
+              error={formik.touched.role && Boolean(formik.errors.role)}
+              helperText={formik.touched.role && formik.errors.role}
+            >
+              <MenuItem disabled value="0">
+                Role
+              </MenuItem>
+              {Object.keys(Role).map((r) => (
+                <MenuItem key={r} value={r}>
+                  {r}
+                </MenuItem>
+              ))}
+            </Select>
+          </Grid>
+
           <Grid item xs={12}>
             <Typography variant={"subtitle2"} sx={{ marginBottom: 2 }}>
               Enter your email
