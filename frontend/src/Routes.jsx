@@ -1,10 +1,12 @@
 import { Routes as ReactRoutes, Route, Navigate } from "react-router-dom";
-import { Home } from "./views";
+import viewsRoutes from "./views/routes";
 
 const Routes = () => {
   return (
     <ReactRoutes>
-      <Route path="/" element={<Home />} />
+      {viewsRoutes.map((item, i) => (
+        <Route key={i} path={item.path} element={item.renderer()} />
+      ))}
       {/* <Route path="*" element={<Navigate replace to="/not-found-cover" />} /> */}
     </ReactRoutes>
   );

@@ -51,7 +51,7 @@ const Topbar = ({ onSidebarOpen, colorInvert = false }) => {
             variant="contained"
             color="primary"
             component="a"
-            href="/login"
+            href="/signin"
             size="large"
           >
             Login

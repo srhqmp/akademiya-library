@@ -47,7 +47,7 @@ const SidebarNav = () => {
             variant="contained"
             color="primary"
             component="a"
-            href="/login"
+            href="/signin"
             size="large"
           >
             Login
