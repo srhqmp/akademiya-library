@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Box from "@mui/material/Box";
@@ -6,6 +8,11 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+
+import { useLoginMutation } from "../../../../slices/usersApiSlice";
+import { setCredentials } from "../../../../slices/authSlice";
 
 const validationSchema = yup.object({
   email: yup
@@ -20,13 +27,34 @@ const validationSchema = yup.object({
 });
 
 const Form = () => {
+  const [login, { isLoading }] = useLoginMutation();
+
+  const { userInfo } = useSelector((state) => state.auth);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const initialValues = {
     email: "",
     password: "",
   };
 
-  const onSubmit = (values) => {
-    return values;
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/");
+    }
+  }, [navigate, userInfo]);
+
+  const onSubmit = async ({ email, password }) => {
+    try {
+      const res = await login({ email, password }).unwrap();
+      dispatch(setCredentials({ ...res }));
+      console.log(res);
+      toast.success(`Welcome back ${res.firstName}!`);
+      navigate("/");
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
   };
 
   const formik = useFormik({
@@ -127,7 +155,12 @@ const Form = () => {
                   </Link>
                 </Typography>
               </Box>
-              <Button size={"large"} variant={"contained"} type={"submit"}>
+              <Button
+                size={"large"}
+                disabled={isLoading}
+                variant={"contained"}
+                type={"submit"}
+              >
                 Login
               </Button>
             </Box>
