@@ -11,12 +11,11 @@ const borrowedBookSchema = new mongoose.Schema({
 
 const userSchema = mongoose.Schema(
   {
-    username: {
+    firstName: {
       type: String,
       required: true,
-      unique: true,
     },
-    name: {
+    lastName: {
       type: String,
       required: true,
     },
@@ -34,6 +33,7 @@ const userSchema = mongoose.Schema(
     password: {
       type: String,
       required: true,
+      minLength: 8,
     },
     borrowedBooks: [borrowedBookSchema],
   },

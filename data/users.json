@@ -1,28 +1,28 @@
 [
   {
-    "username": "root",
+    "firstName": "Root",
+    "lastName": "Root",
     "password": "AkademiyaLibrary@2024",
     "email": "root@test.com",
-    "name": "Super Admin",
     "role": "admin"
   },
   {
-    "username": "srhqmp",
+    "firstName": "Sarah",
+    "lastName": "Quimpo",
     "password": "AkademiyaLibrary@2024",
     "email": "kimposarah@gmail.com",
-    "name": "Sarah Quimpo",
     "role": "admin"
   },
   {
-    "username": "minzy21",
+    "firstName": "Minzy",
+    "lastName": "Gong",
     "password": "AkademiyaLibrary@2024",
-    "email": "minzy21@test.com",
-    "name": "Minzy Gong"
+    "email": "minzy21@test.com"
   },
   {
-    "username": "jd2024",
+    "firstName": "Juan",
+    "lastName": "Dela Cruz",
     "password": "AkademiyaLibrary@2024",
-    "email": "jd2024@test.com",
-    "name": "Juan Dela Cruz"
+    "email": "jd2024@test.com"
   }
 ]

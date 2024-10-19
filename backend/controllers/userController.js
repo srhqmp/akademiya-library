@@ -7,23 +7,23 @@ import generateToken from "../utils/generateToken.js";
 // @access Public
 
 const authUser = asyncHandler(async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  const user = await User.findOne({ username });
+  const user = await User.findOne({ email });
 
   if (user && (await user.matchPassword(password))) {
     generateToken(res, user._id);
 
     res.json({
       _id: user._id,
-      username: user.username,
-      name: user.name,
+      firstName: user.firstName,
+      lastName: user.lastName,
       email: user.email,
       role: user.role,
     });
   } else {
     res.status(401);
-    throw new Error("Invalid username or password");
+    throw new Error("Invalid email or password");
   }
 });
 
@@ -31,9 +31,9 @@ const authUser = asyncHandler(async (req, res) => {
 // @route   POST /api/users
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { username, name, email, role, password } = req.body;
+  const { firstName, lastName, email, role, password } = req.body;
 
-  const userExists = await User.findOne({ username });
+  const userExists = await User.findOne({ email });
 
   if (userExists) {
     res.status(400);
@@ -41,8 +41,8 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 
   const user = await User.create({
-    username,
-    name,
+    firstName,
+    lastName,
     email,
     role,
     password,
@@ -53,8 +53,8 @@ const registerUser = asyncHandler(async (req, res) => {
 
     res.status(201).json({
       _id: user._id,
-      username: user.username,
-      name: user.name,
+      firstName: user.firstName,
+      lastName: user.lastName,
       email: user.email,
       role: user.role,
     });
@@ -82,8 +82,8 @@ const getUserProfile = asyncHandler(async (req, res) => {
   if (req.user) {
     res.json({
       _id: req.user._id,
-      username: req.user.username,
-      name: req.user.name,
+      firstName: req.user.firstName,
+      lastName: req.user.lastName,
       email: req.user.email,
       role: req.user.role,
     });
@@ -100,8 +100,8 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
   if (user) {
-    user.username = req.body.username || user.username;
-    user.name = req.body.name || user.name;
+    user.firstName = req.body.firstName || user.firstName;
+    user.lastName = req.body.lastName || user.lastName;
     user.email = req.body.email || user.email;
 
     if (req.body.password) {
@@ -112,8 +112,8 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 
     res.json({
       _id: updatedUser._id,
-      username: updatedUser.username,
-      name: updatedUser.name,
+      firstName: updatedUser.firstName,
+      lastName: updatedUser.lastName,
       email: updatedUser.email,
       role: updatedUser.role, // role should remain the same
     });
