@@ -23,7 +23,7 @@ const NavItem = ({ title, id, href }) => {
           href={href}
           fullWidth
           sx={{
-            justifyContent: "flex-start",
+            justifyContent: "center",
             color:
               activeLink === href
                 ? theme.palette.primary.main

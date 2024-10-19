@@ -24,7 +24,8 @@ const Hero = () => {
               fontWeight: 700,
             }}
           >
-            Welcome to Akademiiya Library.
+            Welcome to{" "}
+            <span style={{ color: "#0aa6a6" }}>Akademiya Library</span>
             <br />
             Discover Knowledge, Fuel Your Curiosity.
           </Typography>
@@ -59,22 +60,6 @@ const Hero = () => {
           >
             Search Titles
           </Button>
-          <Box
-            marginTop={{ xs: 2, sm: 0 }}
-            marginLeft={{ sm: 2 }}
-            width={{ xs: "100%", md: "auto" }}
-          >
-            <Button
-              component={"a"}
-              href={"/login"}
-              variant="outlined"
-              color="primary"
-              size="large"
-              fullWidth={isMd ? false : true}
-            >
-              Create an Account
-            </Button>
-          </Box>
         </Box>
       </Box>
       {/* TODO: Display books */}

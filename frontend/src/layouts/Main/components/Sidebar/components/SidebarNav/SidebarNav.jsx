@@ -2,6 +2,7 @@ import { Box, Button, useTheme } from "@mui/material";
 import NavItem from "./components/NavItem";
 
 import LogoType from "../../../../../../../public/logo-type.png";
+import LogoTypeDark from "../../../../../../../public/logo-type-dark.png";
 
 const SidebarNav = () => {
   const theme = useTheme();
@@ -19,7 +20,7 @@ const SidebarNav = () => {
         >
           <Box
             component={"img"}
-            src={mode === "light" ? LogoType : LogoType}
+            src={mode === "light" ? LogoType : LogoTypeDark}
             height={1}
             width={1}
           />
