@@ -1,7 +1,7 @@
 import { Grid2 as Grid, Box, Link, Typography, useTheme } from "@mui/material";
 
-import LogoType from "../../../../../public/logo-type.png";
-import LogoTypeDark from "../../../../../public/logo-type-dark.png";
+import LogoType from "../../../../assets/logo-type.png";
+import LogoTypeDark from "../../../../assets/logo-type-dark.png";
 
 const Footer = () => {
   const theme = useTheme();

@@ -3,7 +3,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 import { ThemeModeToggler } from "../../../../components";
 import { NavItem } from "./components";
-import LogoType from "../../../../../public/logo-type.png";
+import LogoType from "../../../../assets/logo-type.png";
 
 const Topbar = ({ onSidebarOpen, colorInvert = false }) => {
   const theme = useTheme();
