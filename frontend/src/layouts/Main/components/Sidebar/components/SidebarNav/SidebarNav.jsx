@@ -42,17 +42,6 @@ const SidebarNav = () => {
         <Box>
           <NavItem title={"FAQs"} href="/faqs" id={"faqs"} />
         </Box>
-        <Box>
-          <Button
-            variant="contained"
-            color="primary"
-            component="a"
-            href="/signin"
-            size="large"
-          >
-            Login
-          </Button>
-        </Box>
       </Box>
     </Box>
   );

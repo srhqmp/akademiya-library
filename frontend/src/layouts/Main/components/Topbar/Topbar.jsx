@@ -1,13 +1,23 @@
+import { useState, useEffect } from "react";
 import { Box, Button, alpha, useTheme } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import { useSelector } from "react-redux";
 
 import { ThemeModeToggler } from "../../../../components";
 import { NavItem } from "./components";
 import LogoType from "../../../../assets/logo-type.png";
+import { UserMenu } from "./components/UserMenu";
 
 const Topbar = ({ onSidebarOpen, colorInvert = false }) => {
   const theme = useTheme();
   const { mode } = theme.palette;
+  const { userInfo } = useSelector((state) => state.auth);
+
+  const [activeLink, setActiveLink] = useState("");
+
+  useEffect(() => {
+    setActiveLink(window && window.location ? window.location.pathname : "");
+  }, []);
 
   return (
     <Box
@@ -47,21 +57,52 @@ const Topbar = ({ onSidebarOpen, colorInvert = false }) => {
           <NavItem title={"FAQs"} href="/faqs" id={"faqs"} />
         </Box>
         <Box marginLeft={4}>
-          <Button
-            variant="contained"
-            color="primary"
-            component="a"
-            href="/signin"
-            size="large"
-          >
-            Login
-          </Button>
+          {userInfo ? (
+            <UserMenu />
+          ) : (
+            <Box>
+              {activeLink === "/signin" ? null : (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  component="a"
+                  href="/signin"
+                  size="small"
+                >
+                  Login
+                </Button>
+              )}
+            </Box>
+          )}
         </Box>
         <Box marginLeft={4}>
           <ThemeModeToggler />
         </Box>
       </Box>
-      <Box sx={{ display: { xs: "flex", md: "none" } }} alignItems={"center"}>
+      <Box
+        sx={{ display: { xs: "flex", md: "none" } }}
+        alignItems={"center"}
+        gap={1}
+      >
+        <Box>
+          {userInfo ? (
+            <UserMenu />
+          ) : (
+            <Box>
+              {activeLink === "/signin" ? null : (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  component="a"
+                  href="/signin"
+                  size="small"
+                >
+                  Login
+                </Button>
+              )}
+            </Box>
+          )}
+        </Box>
         <Box>
           <ThemeModeToggler />
         </Box>
@@ -74,7 +115,7 @@ const Topbar = ({ onSidebarOpen, colorInvert = false }) => {
             minWidth: "auto",
             padding: 1,
             borderColor: alpha(theme.palette.divider, 0.2),
-            marginLeft: 4,
+            marginLeft: 1,
           }}
         >
           <MenuIcon />
